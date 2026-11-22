@@ -1424,7 +1424,7 @@
  },
  {
   "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77A_2024_CNR.pdf",
-  "captured_at": "2026-09-17T01:22:21.283235+00:00",
+  "captured_at": "2026-11-22T21:24:56.437008+00:00",
   "status": 404,
   "final_url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77A_2024_CNR.pdf",
   "content_type": "text/html; charset=UTF-8",
@@ -3767,7 +3767,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
-  "captured_at": "2026-09-14T00:05:42.445594+00:00",
+  "captured_at": "2026-11-22T21:24:56.437267+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -6575,7 +6575,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_32_2023_UNIBA.pdf",
-  "captured_at": "2026-09-17T01:22:21.283516+00:00",
+  "captured_at": "2026-11-22T21:24:56.437387+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_32_2023_UNIBA.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -6606,7 +6606,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
-  "captured_at": "2026-09-17T01:22:21.283596+00:00",
+  "captured_at": "2026-11-22T21:24:56.437448+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -6833,7 +6833,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
-  "captured_at": "2026-09-17T01:22:21.283659+00:00",
+  "captured_at": "2026-11-22T21:24:56.437494+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -8060,6 +8060,51 @@
   "content_type": "application/pdf",
   "bytes": 422653,
   "sha256": "def00962f9e197918df142699ca3bf76377085ff980a9a4156b9d3f3810d669a"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_75F_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:56.437533+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_75F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 413625,
+  "sha256": "7a72f458717de796cbfffb47923861a93c9be004e35672e67baac23974526609"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77F_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:56.809718+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 431746,
+  "sha256": "7b055d3ea58811f992362083748228d8cca099239e4142baf25df642046b6ef1"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_82F_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:57.307171+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_82F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 487481,
+  "sha256": "a4a548092ee5acafbe1ba906f0e8e6b85fb9d5093a3e04383ccd997dad1eb366"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_85F_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:57.307257+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_85F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 411704,
+  "sha256": "7e011de6f588a82ad1522f63049a1e8527e030fbf3506626bdec93126a53e297"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_90F_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:57.307550+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_90F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 423343,
+  "sha256": "a9149300cf59931a987bd909445951b9b726f3558cbb39dd76abe50db9c274e6"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_02_2018.pdf",
@@ -11151,7 +11196,7 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
-  "captured_at": "2026-09-14T00:05:42.447183+00:00",
+  "captured_at": "2026-11-22T21:24:57.331559+00:00",
   "status": 500,
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -14894,7 +14939,7 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
-  "captured_at": "2026-09-14T00:05:42.447244+00:00",
+  "captured_at": "2026-11-22T21:24:57.688974+00:00",
   "status": 500,
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -15165,7 +15210,7 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
-  "captured_at": "2026-09-14T00:05:42.447291+00:00",
+  "captured_at": "2026-11-22T21:24:57.957542+00:00",
   "status": 500,
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -15733,6 +15778,15 @@
   "sha256": "05ac2dff33251baaebaeac4ab0f7716df585d73e22f4e0f92327a887b65b84c3"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_74P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:58.091229+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_74P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 441776,
+  "sha256": "9369606befebed624af7a99ba9cbad5428110c12c5a90c7f88015118add7d59e"
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_75P_2025_CNR.pdf",
   "captured_at": "2026-09-11T04:13:37.692959+00:00",
   "status": 200,
@@ -15749,12 +15803,30 @@
   "sha256": "51ae2553cf55c650f6637b77e2ae88419abeecb3910a00fe3997a173c314c5a0"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_76P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:58.214535+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_76P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 491590,
+  "sha256": "8362fd61f4e22b790f27d76754e4a416cc31254dbd445f72747275f85e06e8cf"
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_77_2023_UNIBA.pdf",
   "captured_at": "2026-09-11T04:13:38.223558+00:00",
   "status": 200,
   "content_type": "application/pdf",
   "bytes": 455226,
   "sha256": "d49662917f58b54cdc4d0c05a8779aea328309db72b9f34ded34d30043eb69c3"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_78P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:58.505965+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_78P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 414757,
+  "sha256": "9cd7f6974ee1fa5303e725d81a406eee2b53fe6f203efce210088d63acf50139"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_79P_2021.pdf",
@@ -15805,12 +15877,30 @@
   "sha256": "c7a5811cce13c4169de4f5aa5534835d6b6a4530271de02d138bec1b793edc40"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_80P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:58.512652+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_80P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 442178,
+  "sha256": "278debd99889b6c6021fda4725ee111bae83da179a84353cc44ec72b642ced8f"
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_81P_2021.pdf",
   "captured_at": "2026-09-11T04:13:43.000507+00:00",
   "status": 200,
   "content_type": "application/pdf",
   "bytes": 644345,
   "sha256": "cfce4d0467e80d32cd2799443638a68be13e2a1c3212759f505569a46402cb12"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_82P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:59.516814+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_82P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 429088,
+  "sha256": "05e5ccb77573f2d9f68023d472ae63310bde73c13226380e8a3393ee1c108ff1"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_82_2021.pdf",
@@ -15821,12 +15911,39 @@
   "sha256": "0cab113a3295eea137c2ef94a3ce314e8af93df5a89809f248d9e13f639bccb4"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_83P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:24:59.921058+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_83P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 439960,
+  "sha256": "191654ff92ab9e14d4c43743b748627c2a8507985102f3122584c1e32d793381"
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_849_2024_CRSFA.pdf",
   "captured_at": "2026-09-11T04:13:43.680361+00:00",
   "status": 200,
   "content_type": "application/pdf",
   "bytes": 244686,
   "sha256": "4c07d917d9ea541b57732dbd86aaf00462e36eec5d233ca53fa153a54fc669d5"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_84P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:25:00.184196+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_84P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 502156,
+  "sha256": "94abc2b76e7b12f0be9ad902a896cb12e26a08a2a1bd95dd555e384e24268cdd"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_86P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:25:00.322054+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_86P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 442262,
+  "sha256": "292de3cc182651afaa849fa96163a285008b0d887f5aab51f6c7db6dbda1fc2f"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_876_2022_CRSFA.pdf",
@@ -15843,6 +15960,15 @@
   "content_type": "application/pdf",
   "bytes": 235666,
   "sha256": "bbc0f7a27631a6f340ff7216b9312a9a2a0fad2d763488d8570980adf9e938bb"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_87P_2026_CNR.pdf",
+  "captured_at": "2026-11-22T21:25:00.605972+00:00",
+  "status": 200,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_87P_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 447050,
+  "sha256": "4beeb9abc4e9c59b7f76c623d2ba6f1a1736912e31d2db9fbc3eb4a0241f3367"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_87_2023_UNIBA.pdf",

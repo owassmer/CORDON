@@ -1,26 +1,21 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/56",
   "name": "Pianta positiva-Monitoraggio 2018-2019",
-  "captured_from": "2026-09-10T21:35:16.464286+00:00",
-  "captured_through": "2026-09-10T21:35:26.561863+00:00",
+  "captured_from": "2026-11-22T21:02:08.032194+00:00",
+  "captured_through": "2026-11-22T21:02:11.858490+00:00",
   "oid_field": "OBJECTID",
   "rows": 1075,
   "unique_oids": 1075,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 400,
-      "sha256": "6c8e60d570b668b5bc87803925e0763821d7a7883c1b80c00cd7ddfc610adfb7"
+      "path": "ids-1-8356.json.gz",
+      "rows": 900,
+      "sha256": "cc095a8f7034528f0f05a4da1faefe0f98b0c9baabf9c35168aab5821b722211"
     },
     {
-      "path": "00000400.json.gz",
-      "rows": 400,
-      "sha256": "79ddf06fe320a19b9435794ac82746266b19a4018ed604ad14201b0216871212"
-    },
-    {
-      "path": "00000800.json.gz",
-      "rows": 275,
-      "sha256": "fd0a957df5e59e126ad3788972774b7bbe3658d860c8f553f86bb5e74b0d8fde"
+      "path": "ids-8357-10588.json.gz",
+      "rows": 175,
+      "sha256": "f020e366d8f5404d473b536e97b1788e6de1dcafb580fa3b7f0ba70eb37deed7"
     }
   ]
 }

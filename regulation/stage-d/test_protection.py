@@ -549,6 +549,33 @@ class NamingRecords(unittest.TestCase):
 class ReadProtectionRun(unittest.TestCase):
     """`read_protection.py --records`: the run states its decision, cutoff and grant, and its rows are its own."""
 
+    def test_the_shared_rows_version_follows_row_1s_capture(self):
+        """The shared rows file is named by the reader and the records it reads. Row 1's observations are the
+        affected plants and zone negatives, so a refreshed monitoring capture names a new file, and read_landscape
+        never reads rows built from another capture."""
+        import shutil
+        import sys
+        import tempfile
+        from unittest import mock
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import read_protection
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            for name in (protection.SOURCES + '/register.json', protection.SOURCES + '/acts.json', protection.ORDERS,
+                         protection.MONITORING + '/campaign/releases.json'):
+                (folder / name).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, folder / name)
+            layer = folder / protection.MONITORING / 'sit/Operationals2/Service/2/release.json'
+            layer.parent.mkdir(parents=True)
+            layer.write_text(json.dumps({'rows': 1, 'pages': [{'sha256': '0' * 64}]}))
+            with mock.patch.object(read_protection, 'ROOT', folder):
+                before = read_protection.version()
+                layer.write_text(json.dumps({'rows': 2, 'pages': [{'sha256': '1' * 64}]}))
+                after_layer = read_protection.version()
+                self.assertNotEqual(after_layer, before)
+                (folder / protection.MONITORING / 'campaign/releases.json').write_text('[]')
+                self.assertNotEqual(read_protection.version(), after_layer)
+
     def test_the_run_is_stated_and_its_rows_never_go_to_the_shared_file(self):
         import sys
         import tempfile
@@ -869,7 +896,10 @@ class HeldSources(unittest.TestCase):
         states = [p for p in group if any(n.reading == 'states' for n in p.record.notes)]
         unclear = [p for p in group if any(n.reading == 'unclear' for n in p.record.notes) and p not in states]
         measured = [p for p in group if p.record.measurements]
-        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
+        # Counted on row 1 as captured on 2026-11-22; the capture of 2026-09-10 gave 317 and 318, and the two since are
+        # Cagnano Varano positives 1975021 and 1975024 of 2026-09-11, whose NOTE_RILEVATORE prints monumental
+        # characteristics. The figures move with each capture.
+        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (319, 2, 13, 320))
 
     def test_no_article_15_input_and_no_owner_names(self):
         out = json.dumps(protection.rows(self.result), ensure_ascii=False)

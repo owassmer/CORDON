@@ -1,26 +1,21 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/38",
   "name": "Positivi - Campioni 2018-2019",
-  "captured_from": "2026-09-10T21:26:36.693125+00:00",
-  "captured_through": "2026-09-10T21:26:40.721391+00:00",
+  "captured_from": "2026-11-22T21:00:47.557306+00:00",
+  "captured_through": "2026-11-22T21:00:51.497011+00:00",
   "oid_field": "OBJECTID",
   "rows": 1075,
   "unique_oids": 1075,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 400,
-      "sha256": "bfc5145fe4390bcd16f194ff80e84fb0baf6342da448c61c522ed76933ebde26"
+      "path": "ids-28035-31135.json.gz",
+      "rows": 900,
+      "sha256": "a1836c210c482e6a319dab8705ab34a2c68f7e73bb6cae5538e1a5e4b92216b6"
     },
     {
-      "path": "00000400.json.gz",
-      "rows": 400,
-      "sha256": "16b8f66f42511c0cfab54a4bf61868c3e75eda7503e2674467bb55782a1b159e"
-    },
-    {
-      "path": "00000800.json.gz",
-      "rows": 275,
-      "sha256": "d8ffa8d03c99991caab2743eb6616e9f3dabb3e093adff6ebd5bdf8a40939df5"
+      "path": "ids-31136-33007.json.gz",
+      "rows": 175,
+      "sha256": "6aed4c4d188342b6c4d9c8bcd5e1b27629e78425fe19dce7521cd96136d271dc"
     }
   ]
 }

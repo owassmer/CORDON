@@ -1,31 +1,21 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/9",
   "name": "Altre Aree - Campioni 2024 sub. pauca",
-  "captured_from": "2026-09-10T21:26:25.986238+00:00",
-  "captured_through": "2026-09-10T21:26:28.805011+00:00",
+  "captured_from": "2026-11-22T21:00:21.588338+00:00",
+  "captured_through": "2026-11-22T21:00:25.840152+00:00",
   "oid_field": "OBJECTID",
   "rows": 1420,
   "unique_oids": 1420,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 400,
-      "sha256": "d4040eab1783ccde2f72f72cedb39742e7541d547114fd7c588208592651afa4"
+      "path": "ids-377-15336.json.gz",
+      "rows": 900,
+      "sha256": "78ea5132c46f6a2641bc1697707a667d9975d9521e177c49c71c83e00502cce7"
     },
     {
-      "path": "00000400.json.gz",
-      "rows": 400,
-      "sha256": "9ebeaa3847d9e735ecf6386dd26e54cc0ce55b9654fa1f86c1c8f4b245eb8953"
-    },
-    {
-      "path": "00000800.json.gz",
-      "rows": 400,
-      "sha256": "0d4bdfe1e46ebf53a2a87d37ed00ca24f42dcdc5a6efc85438bff160555ed7eb"
-    },
-    {
-      "path": "00001200.json.gz",
-      "rows": 220,
-      "sha256": "cb7a4b217b237c6c4b431d6d29bb8daf65f5199f8fa678667cc365824b19761e"
+      "path": "ids-15337-29374.json.gz",
+      "rows": 520,
+      "sha256": "17f28c4b7ee999feb7a4506f9af8b74d1d391b86372e7745eb200ab119057104"
     }
   ]
 }

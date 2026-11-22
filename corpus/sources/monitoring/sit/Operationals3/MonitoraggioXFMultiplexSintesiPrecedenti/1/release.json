@@ -1,16 +1,16 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFMultiplexSintesiPrecedenti/MapServer/1",
   "name": "Positivi - Campioni 2025 sub. multiplex",
-  "captured_from": "2026-09-10T21:36:05.372066+00:00",
-  "captured_through": "2026-09-10T21:36:29.856267+00:00",
+  "captured_from": "2026-11-22T21:02:14.477431+00:00",
+  "captured_through": "2026-11-22T21:02:17.655601+00:00",
   "oid_field": "OBJECTID",
   "rows": 36,
   "unique_oids": 36,
   "pages": [
     {
-      "path": "00000000.json.gz",
+      "path": "ids-2882-4163.json.gz",
       "rows": 36,
-      "sha256": "70b8aefd2a22e87fa4cd3222a6c5f828acee33634e38dc23b19efa236e43ab5e"
+      "sha256": "2f13b9b355aa0cbeeb9ca06e45c85366a695dcf1ad34610099e98b42e6abefd3"
     }
   ]
 }

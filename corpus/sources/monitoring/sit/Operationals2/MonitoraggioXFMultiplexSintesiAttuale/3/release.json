@@ -1,16 +1,16 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFMultiplexSintesiAttuale/MapServer/3",
   "name": "Fruttiferi - Campioni 2026 sub. multiplex",
-  "captured_from": "2026-09-10T21:26:25.985796+00:00",
-  "captured_through": "2026-09-10T21:26:33.809014+00:00",
+  "captured_from": "2026-11-22T21:00:21.584124+00:00",
+  "captured_through": "2026-11-22T21:00:25.968909+00:00",
   "oid_field": "OBJECTID",
-  "rows": 211,
-  "unique_oids": 211,
+  "rows": 359,
+  "unique_oids": 359,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 211,
-      "sha256": "6f12fb7efa17e674863eb7ff20923b461d3cb1f5a28dd59dacb1047284219de7"
+      "path": "ids-10-2244.json.gz",
+      "rows": 359,
+      "sha256": "1e21e15c9cde188b17f59dbfd5cb1b08d4dad866c4ac339d2cb552f6abce9742"
     }
   ]
 }

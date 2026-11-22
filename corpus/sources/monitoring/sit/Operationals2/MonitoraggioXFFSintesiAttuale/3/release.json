@@ -1,16 +1,36 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFFSintesiAttuale/MapServer/3",
   "name": "Fruttiferi - Campioni 2026 sub. fastidiosa",
-  "captured_from": "2026-09-10T21:26:25.985491+00:00",
-  "captured_through": "2026-09-10T21:26:28.552149+00:00",
+  "captured_from": "2026-11-22T21:00:21.582053+00:00",
+  "captured_through": "2026-11-22T21:00:28.025987+00:00",
   "oid_field": "OBJECTID",
-  "rows": 225,
-  "unique_oids": 225,
+  "rows": 4036,
+  "unique_oids": 4036,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 225,
-      "sha256": "b6f44136107cb9cc459111b273b1ac7f30355673891c70ef20ee19f8c14b2063"
+      "path": "ids-1-1315.json.gz",
+      "rows": 900,
+      "sha256": "3427af59dba95aa3bdf73f6d0da69fc3aa653dac012c65f8a3225e84d1fa5ee2"
+    },
+    {
+      "path": "ids-1316-2216.json.gz",
+      "rows": 900,
+      "sha256": "b00d97395fcbe726161f83027e50783f8693430b2528d7bc7d3f9c89e5ffd5fc"
+    },
+    {
+      "path": "ids-2217-3122.json.gz",
+      "rows": 900,
+      "sha256": "008e79f8ab1fe3ebb4dea44f4030440a79ebb995d401e8b6a4f0b3b569d81323"
+    },
+    {
+      "path": "ids-3123-4038.json.gz",
+      "rows": 900,
+      "sha256": "5782a5111ba121e037299243d2916bf99aebcf1bccce5ba91317d59051519bce"
+    },
+    {
+      "path": "ids-4039-4481.json.gz",
+      "rows": 436,
+      "sha256": "8a1ebc7cf517154b9712ae0269ea499f1a12e1566178e2a1753befb42ece042e"
     }
   ]
 }
