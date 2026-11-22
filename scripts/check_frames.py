@@ -27,8 +27,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-d'))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-c'))
 
-from cordon_d.monitoring import GEOGRAPHIC_FRAME, POINT_TOLERANCE_M, reader_version  # noqa: E402
-from cordon_d.store import store_root  # noqa: E402
+from cordon_d.monitoring import GEOGRAPHIC_FRAME, POINT_TOLERANCE_M, reader_version, releases as recorded  # noqa: E402
+from cordon_d.store import derived_path, store_root  # noqa: E402
 
 # Frames a regional Italian publisher plausibly prints degrees in. A candidate is here to
 # be excluded by measurement; the winner is whichever the printed pairs actually are.
@@ -80,9 +80,14 @@ def main():
 
     root = Path(sys.argv[1] if len(sys.argv) > 1 else 'corpus/sources/monitoring').resolve()
     store = store_root(root)
-    readings = store / 'derived' / 'monitoring' / 'readings' / f'*-{reader_version()}.parquet'
-    if not list(readings.parent.glob(readings.name)):
-        raise SystemExit(f'No derived readings at {reader_version()}; ingest first.')
+    # The readings of the releases the acquisition records name, not every reading in the store: the store keeps
+    # the pages of earlier captures, and a check of this capture reads this capture.
+    version = reader_version()
+    files = sorted({derived_path(store, 'monitoring/readings', r.digest, version) for r in recorded(root)})
+    missing = [f for f in files if not f.exists()]
+    if missing:
+        raise SystemExit(f'{len(missing)} releases have no derived readings at {version}; ingest first.')
+    readings = 'read_parquet([' + ', '.join(f"'{f}'" for f in files) + '])'
 
     spill = Path(tempfile.mkdtemp(prefix='cordon-frames-', dir=store))
     connection = duckdb.connect()
@@ -91,7 +96,7 @@ def main():
     connection.execute(f"SET temp_directory = '{spill}'")
     try:
         frames = [row[0] for row in connection.execute(
-            f"""SELECT DISTINCT crs FROM read_parquet('{readings}')
+            f"""SELECT DISTINCT crs FROM {readings}
                 WHERE crs IS NOT NULL AND crs <> '{GEOGRAPHIC_FRAME}'""").fetchall()]
         if len(frames) != 1:
             raise SystemExit(f'{len(frames)} stated frames in the population; this check assumes one.')
@@ -100,7 +105,7 @@ def main():
         releases = connection.execute(f"""
             SELECT release, count(*) AS readings,
                    count(*) FILTER (WHERE reference IS NOT NULL AND day IS NOT NULL) AS identified
-            FROM read_parquet('{readings}')
+            FROM {readings}
             WHERE crs = '{GEOGRAPHIC_FRAME}' AND x IS NOT NULL AND y IS NOT NULL
             GROUP BY 1 ORDER BY 2 DESC""").fetchall()
         print(f'{len(releases)} degree-publishing releases, stated frame {stated_frame}, '
@@ -112,7 +117,7 @@ def main():
             name = release.rsplit('/', 1)[-1]
             if identified:
                 pairs = connection.execute(f"""
-                    WITH r AS (SELECT reference, day, crs, x, y, release FROM read_parquet('{readings}')
+                    WITH r AS (SELECT reference, day, crs, x, y, release FROM {readings}
                                WHERE reference IS NOT NULL AND day IS NOT NULL
                                  AND x IS NOT NULL AND y IS NOT NULL),
                          s AS (SELECT reference, day, min(x) e, min(y) n,
@@ -142,15 +147,15 @@ def main():
                 # translates the whole cloud, which nearest-neighbour offsets expose.
                 printed = {}
                 for day, lon, lat in connection.execute(f"""
-                        SELECT day, x, y FROM read_parquet('{readings}')
+                        SELECT day, x, y FROM {readings}
                         WHERE crs = '{GEOGRAPHIC_FRAME}' AND release = '{release}'
                           AND x IS NOT NULL AND y IS NOT NULL AND day IS NOT NULL""").fetchall():
                     printed.setdefault(day, []).append((lon, lat))
                 stated = {}
                 for day, e, n in connection.execute(f"""
-                        SELECT day, x, y FROM read_parquet('{readings}')
+                        SELECT day, x, y FROM {readings}
                         WHERE crs = '{stated_frame}' AND x IS NOT NULL AND day IN (
-                            SELECT DISTINCT day FROM read_parquet('{readings}')
+                            SELECT DISTINCT day FROM {readings}
                             WHERE crs = '{GEOGRAPHIC_FRAME}' AND release = '{release}')""").fetchall():
                     stated.setdefault(day, []).append((e, n))
                 fits = {}

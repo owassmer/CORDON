@@ -30,9 +30,13 @@ ZONE = ZoneInfo('Europe/Rome')
 
 
 def version() -> str:
+    """The reader and every acquisition record the rows are read from, row 1's among them: the affected plants and
+    zone negatives are row 1's observations, so a refreshed monitoring capture is a different version."""
     digest = sha256()
+    monitoring = ROOT / protection.MONITORING
     for path in (Path(protection.__file__), ROOT / protection.SOURCES / 'register.json',
-                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS):
+                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS,
+                 monitoring / 'campaign/releases.json', *sorted(monitoring.glob('sit/*/*/*/release.json'))):
         digest.update(path.read_bytes())
     return digest.hexdigest()[:12]
 
