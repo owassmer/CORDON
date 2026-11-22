@@ -571,9 +571,10 @@ class ReadProtectionRun(unittest.TestCase):
             with mock.patch.object(read_protection, 'ROOT', folder):
                 before = read_protection.version()
                 layer.write_text(json.dumps({'rows': 2, 'pages': [{'sha256': '1' * 64}]}))
-                self.assertNotEqual(read_protection.version(), before)
+                after_layer = read_protection.version()
+                self.assertNotEqual(after_layer, before)
                 (folder / protection.MONITORING / 'campaign/releases.json').write_text('[]')
-                self.assertEqual(len({before, read_protection.version()}), 2)
+                self.assertNotEqual(read_protection.version(), after_layer)
 
     def test_the_run_is_stated_and_its_rows_never_go_to_the_shared_file(self):
         import sys
